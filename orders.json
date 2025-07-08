@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Алишер",
+        "models": [
+            "iPhone XR",
+            "Samsung A13"
+        ],
+        "total": 340
+    },
+    {
+        "name": "Саид",
+        "models": [
+            "Redmi Note 10"
+        ],
+        "total": 170
+    }
+]
