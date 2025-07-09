@@ -10,5 +10,5 @@ def index():
 def admin():
     return render_template('admin.html')
 
-if name == 'main':
+if name == '__main__':
     app.run(debug=True)
