@@ -52,5 +52,18 @@
     <button class="edit-btn">Редактировать</button>
   </div>
 
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const buttons = document.querySelectorAll('.edit-btn');
+    buttons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        const productNames = ['iPhone XR', 'Samsung A13'];
+        const product = productNames[index];
+        tg.sendData(✏️ Редактирование товара: ${product});
+      });
+    });
+  </script>
 </body>
 </html>
