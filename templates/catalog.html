@@ -53,15 +53,23 @@
   </div>
 
   <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+    // Отправка данных обратно в Telegram-бот
+    function notifyBot(productName) {
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.sendData(JSON.stringify({
+          action: 'edit',
+          product: productName
+        }));
+      } else {
+        alert('Telegram WebApp не поддерживается');
+      }
+    }
 
-    const buttons = document.querySelectorAll('.edit-btn');
-    buttons.forEach((btn, index) => {
+    // Назначаем обработку кнопок
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const productNames = ['iPhone XR', 'Samsung A13'];
-        const product = productNames[index];
-        tg.sendData(✏️ Редактирование товара: ${product});
+        const productName = btn.parentElement.querySelector('h3').innerText.trim();
+        notifyBot(productName);
       });
     });
   </script>
