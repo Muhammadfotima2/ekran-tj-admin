@@ -1,20 +1,15 @@
-import os
-import json
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(name)
 
 @app.route('/')
-def index():
-    return render_template('catalog.html')  # <-- главное меню
+def home():
+    return '<h2>✅ Сервер работает. Перейдите на <a href="/admin">/admin</a></h2>'
 
-@app.route('/orders', methods=['GET'])
-def get_orders():
-    with open('orders.json', 'r', encoding='utf-8') as file:
-        orders = json.load(file)
-    return jsonify(orders)
+@app.route('/admin')
+def admin_panel():
+    return render_template('admin.html')
 
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
+if name == 'main':
+    app.run(host='0.0.0.0', port=8080)
 
