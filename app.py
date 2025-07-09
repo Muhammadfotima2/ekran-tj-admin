@@ -6,5 +6,5 @@ app = Flask(__name__, static_folder='public')
 def admin_panel():
     return send_from_directory('public', 'admin.html')
 
-if name == '__main__':
+if __name__ == '__main__':
     app.run()
