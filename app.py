@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(name)
 
 @app.route('/')
 def index():
@@ -10,5 +10,5 @@ def index():
 def admin():
     return render_template('admin.html')
 
-if name == '__main__':
+if name == 'main':
     app.run(debug=True)
