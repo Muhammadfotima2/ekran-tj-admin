@@ -1,6 +1,6 @@
 from flask import Flask, send_from_directory
 
-app = Flask(name, static_folder='public')
+app = Flask(__name__, static_folder='public')
 
 @app.route('/')
 def admin_panel():
