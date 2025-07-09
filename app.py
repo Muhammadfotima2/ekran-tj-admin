@@ -3,13 +3,12 @@ from flask import Flask, render_template
 app = Flask(name)
 
 @app.route('/')
-def home():
-    return '<h2>✅ Сервер работает. Перейдите на <a href="/admin">/admin</a></h2>'
+def index():
+    return render_template('index.html')
 
 @app.route('/admin')
-def admin_panel():
+def admin():
     return render_template('admin.html')
 
 if name == 'main':
-    app.run(host='0.0.0.0', port=8080)
-
+    app.run(debug=True)
