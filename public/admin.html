@@ -1,71 +1,87 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html><html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Админ-панель</title>
+  <meta charset="UTF-8">
+  <title>Добавить товар</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    .form-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
       text-align: center;
-      padding: 40px 20px;
+      margin-bottom: 20px;
+      color: #333;
     }
-
-    h1 {
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 30px;
-    }
-
-    .btn {
+    label {
       display: block;
-      width: 75%;
-      max-width: 260px;
-      margin: 12px auto;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 30px; /* ← Вот здесь круглые края */
-      font-size: 16px;
-      color: white;
-      text-decoration: none;
-      transition: 0.3s ease;
+      margin-bottom: 6px;
+      font-weight: bold;
     }
-
-    .btn-green {
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
       background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
     }
-
-    .btn-blue {
-      background-color: #007bff;
-    }
-
-    .btn-red {
-      background-color: #dc3545;
-    }
-
-    .btn-orange {
-      background-color: #fd7e14;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-      transform: scale(1.02);
+    button:hover {
+      background-color: #218838;
     }
   </style>
 </head>
 <body>
-  <h1>🛠 Добро пожаловать в<br><b>админ-панель</b></h1>
-  <p>Выберите действие ниже:</p>
+  <div class="form-container">
+    <h2>➕ Добавить товар</h2>
+    <form action="/add" method="POST">
+      <label>Категория</label>
+      <select name="category" required>
+        <option value="iPhone">iPhone</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Redmi">Redmi</option>
+        <option value="Realmi">Realmi</option>
+        <option value="Oppo">Oppo</option>
+        <option value="Vivo">Vivo</option>
+        <option value="Huawei">Huawei</option>
+        <option value="Honor">Honor</option>
+        <option value="Tecno">Tecno</option>
+        <option value="Infinix">Infinix</option>
+        <option value="ZTE">ZTE</option>
+        <option value="WIKO">WIKO</option>
+      </select><label>Название модели</label>
+  <input type="text" name="model" placeholder="Например: iPhone XR" required>
 
-  <a href="/add" class="btn btn-green">➕ Добавить</a>
-  <a href="/edit" class="btn btn-blue">📝 Изменить</a>
-  <a href="/delete" class="btn btn-red">❌ Удалить</a>
-  <a href="/orders" class="btn btn-orange">📦 Заказы</a>
+  <label>Качество</label>
+  <select name="quality" required>
+    <option value="Original">Original</option>
+    <option value="OLED">OLED</option>
+    <option value="Incell">Incell</option>
+  </select>
+
+  <label>Цена</label>
+  <input type="text" name="price" placeholder="Например: 240 сомонӣ" required>
+
+  <button type="submit">💾 Сохранить товар</button>
+</form>
+
+  </div>
 </body>
 </html>
