@@ -1,92 +1,104 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="tj">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EKRAN.TJ - KBS</title>
+  <title>Каталог - KBS</title>
   <style>
     body {
       margin: 0;
-      padding: 20px;
       font-family: 'Segoe UI', sans-serif;
-      background: url("image/background.jpg") no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to bottom right, #000000, #8b0000);
       color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .welcome-box {
       text-align: center;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: linear-gradient(to right, #1a1a1a, #8b0000);
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
     }
 
-    .gradient-text {
-      background: linear-gradient(45deg, red, orange, yellow, cyan, violet);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+    .welcome-box h2 {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
-    .welcome {
-      font-size: 20px;
-      margin-top: 30px;
+    .welcome-box p {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 18px;
       line-height: 1.6;
     }
 
-    .title {
-      font-size: 26px;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .kbs-rotate {
+    .rotate-kbs {
       display: inline-block;
-      animation: spin 3s linear infinite;
-      font-weight: bold;
+      color: #00ffff;
+      animation: spin 4s linear infinite;
     }
 
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
     }
 
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 15px;
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .category-btn {
+      background: #1a1a1a;
+      border: 2px solid #ff3333;
       border-radius: 12px;
-      margin: 30px auto;
-      max-width: 400px;
-      box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
     }
 
-    .card h2 {
-      font-size: 18px;
-      margin: 5px 0;
-    }
-
-    .card p {
-      margin: 4px 0;
-      font-size: 14px;
+    .category-btn:hover {
+      background: #ff3333;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div class="welcome">
-    <div class="title">
-      <span class="gradient-text">EKRAN.TJ</span>
-      <span class="gradient-text kbs-rotate">KBS</span>
-    </div>
-    <p class="gradient-text">
-      📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем
-    </p>
-    <p class="gradient-text">
-      🛠 Бренди боэътимоди <b>KBS</b> кафолати равшании аъло ва устуворӣ мебошад!
+  <div class="welcome-box">
+    <h2>Хуш омадед ба EKRAN_TJ - <span class="rotate-kbs">KBS</span></h2>
+    <p>
+      Бренди боэътимоди <span class="rotate-kbs">KBS</span> — кафолати <br>
+      равшании аъло ва устуворӣ мебошад
     </p>
   </div>
 
-  <div class="card">
-    <h2>📦 Samsung A10</h2>
-    <p>🛠 Качество: Original</p>
-    <p>🏷 Бренд: KBS</p>
-    <p>💰 Цена: 90 сомонӣ</p>
+  <div class="categories">
+    <div class="category-btn">iPhone</div>
+    <div class="category-btn">Samsung</div>
+    <div class="category-btn">Redmi</div>
+    <div class="category-btn">Realmi</div>
+    <div class="category-btn">Oppo</div>
+    <div class="category-btn">Vivo</div>
+    <div class="category-btn">Huawei</div>
+    <div class="category-btn">Honor</div>
+    <div class="category-btn">Tecno</div>
+    <div class="category-btn">Infinix</div>
+    <div class="category-btn">ZTE</div>
+    <div class="category-btn">WIKO</div>
   </div>
 </body>
 </html>
