@@ -15,21 +15,32 @@
       text-align: center;
     }
 
+    .gradient-text {
+      background: linear-gradient(45deg, red, orange, yellow, cyan, violet);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
     .welcome {
       font-size: 20px;
-      margin-top: 10px;
-      line-height: 1.5;
+      margin-top: 30px;
+      line-height: 1.6;
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     .kbs-rotate {
       display: inline-block;
+      animation: spin 3s linear infinite;
       font-weight: bold;
-      font-size: 22px;
-      background: linear-gradient(45deg, red, yellow, orange, cyan, violet);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      animation: spin 5s linear infinite;
     }
 
     @keyframes spin {
@@ -41,7 +52,7 @@
       background: rgba(0, 0, 0, 0.6);
       padding: 15px;
       border-radius: 12px;
-      margin: 20px auto;
+      margin: 30px auto;
       max-width: 400px;
       box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
     }
@@ -59,10 +70,16 @@
 </head>
 <body>
   <div class="welcome">
-    👋 Хуш омадед ба <br>
-    <span class="kbs-rotate">EKRAN.TJ - KBS</span><br>
-    📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем<br>
-    🛠 Бренди боэътимоди <b class="kbs-rotate">KBS</b> кафолати равшании аъло ва устуворӣ мебошад!
+    <div class="title">
+      <span class="gradient-text">EKRAN.TJ</span>
+      <span class="gradient-text kbs-rotate">KBS</span>
+    </div>
+    <p class="gradient-text">
+      📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем
+    </p>
+    <p class="gradient-text">
+      🛠 Бренди боэътимоди <b>KBS</b> кафолати равшании аъло ва устуворӣ мебошад!
+    </p>
   </div>
 
   <div class="card">
