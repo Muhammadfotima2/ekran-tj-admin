@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Добавить товар</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
       padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
     }
     h2 {
       text-align: center;
       color: #333;
+      margin-bottom: 20px;
     }
-    form {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      color: #333;
     }
-    input, select, button {
+    select, input {
       width: 100%;
-      margin: 10px 0;
       padding: 10px;
-      font-size: 16px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 10px;
+      font-size: 16px;
     }
     button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
       background: #28a745;
       color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
     button:hover {
       background: #218838;
@@ -41,45 +59,60 @@
   </style>
 </head>
 <body>
-  <h2>➕ Добавить товар</h2>
-  <form id="addForm">
-    <select id="category" required>
+  <div class="container">
+    <h2>➕ Добавить товар</h2>
+    <label for="category">Категория</label>
+    <select id="category">
       <option value="">Выберите категорию</option>
-      <option>iPhone</option>
-      <option>Samsung</option>
-      <option>Redmi</option>
-      <option>Realmi</option>
-      <option>Oppo</option>
-      <option>Vivo</option>
-      <option>Huawei</option>
-      <option>Honor</option>
-      <option>Tecno</option>
-      <option>Infinix</option>
-      <option>ZTE</option>
-      <option>WIKO</option>
+      <option value="iPhone">iPhone</option>
+      <option value="Samsung">Samsung</option>
+      <option value="Redmi">Redmi</option>
+      <option value="Realmi">Realmi</option>
+      <option value="Oppo">Oppo</option>
+      <option value="Vivo">Vivo</option>
+      <option value="Huawei">Huawei</option>
+      <option value="Honor">Honor</option>
+      <option value="Tecno">Tecno</option>
+      <option value="Infinix">Infinix</option>
+      <option value="ZTE">ZTE</option>
+      <option value="WIKO">WIKO</option>
+    </select>
+    <label for="model">Название модели</label>
+    <input type="text" id="model" placeholder="Например: iPhone XR">
+
+    <label for="quality">Качество</label>
+    <select id="quality">
+      <option value="Original">Original</option>
+      <option value="OLED">OLED</option>
+      <option value="Incell">Incell</option>
+      <option value="HD+">HD+</option>
+      <option value="Incell Hd+">Incell Hd+</option>
     </select>
 
-    <input type="text" id="model" placeholder="Название модели" required />
-    <input type="text" id="quality" placeholder="Качество (Original, OLED...)" required />
-    <input type="number" id="price" placeholder="Цена в сомонӣ" required />
+    <label for="price">Цена</label>
+    <input type="number" id="price" placeholder="Например: 240 сомони">
 
-    <button type="submit">Добавить</button>
-  </form>
+    <button onclick="submitProduct()">💾 Сохранить товар</button>
+  </div>
 
   <script>
-    document.getElementById("addForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const item = {
-        category: document.getElementById("category").value,
-        model: document.getElementById("model").value,
-        quality: document.getElementById("quality").value,
-        price: parseInt(document.getElementById("price").value)
+    function submitProduct() {
+      const data = {
+        category: document.getElementById('category').value,
+        model: document.getElementById('model').value,
+        quality: document.getElementById('quality').value,
+        price: document.getElementById('price').value
       };
 
-      alert("Товар добавлен (в будущем будет сохранён в базу):\\n" + JSON.stringify(item, null, 2));
+      if (!data.category || !data.model || !data.quality || !data.price) {
+        alert("Пожалуйста, заполните все поля.");
+        return;
+      }
 
-      // Здесь ты можешь добавить код для отправки на сервер или сохранения
-    });
+      const json = JSON.stringify(data);
+      const encoded = encodeURIComponent(json);
+      window.Telegram.WebApp.sendData(encoded);
+    }
   </script>
 </body>
 </html>
