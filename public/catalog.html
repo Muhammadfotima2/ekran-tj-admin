@@ -31,7 +31,7 @@
   <div id="orders"></div>
 
   <script>
-    fetch('/orders.json')
+    fetch('orders.json')
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('orders');
