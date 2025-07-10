@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +22,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .product input, .product select {
+    .product input {
       width: 100%;
       padding: 8px;
       margin: 5px 0;
@@ -50,7 +51,9 @@
 </head>
 <body>
   <h2>🛠 Редактирование товаров</h2>
-  <div id="product-list"></div>  <script>
+  <div id="product-list"></div>
+
+  <script>
     let products = [];
 
     fetch('/products.json')
@@ -64,3 +67,50 @@
       const container = document.getElementById('product-list');
       container.innerHTML = '';
       products.forEach((product, index) => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = 
+          <label>Категория</label>
+          <input type="text" value="${product.category}" id="cat-${index}">
+          <label>Модель</label>
+          <input type="text" value="${product.model}" id="model-${index}">
+          <label>Качество</label>
+          <input type="text" value="${product.quality}" id="quality-${index}">
+          <label>Цена</label>
+          <input type="number" value="${product.price}" id="price-${index}">
+          <button class="save-btn" onclick="saveProduct(${index})">💾 Сохранить</button>
+          <button class="delete-btn" onclick="deleteProduct(${index})">🗑 Удалить</button>
+        ;
+        container.appendChild(div);
+      });
+    }
+
+    function saveProduct(index) {
+      products[index].category = document.getElementById(cat-${index}).value;
+      products[index].model = document.getElementById(model-${index}).value;
+      products[index].quality = document.getElementById(quality-${index}).value;
+      products[index].price = parseInt(document.getElementById(price-${index}).value);
+
+      fetch('/products.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(products)
+      }).then(() => alert("✅ Товар сохранён!"));
+    }
+
+    function deleteProduct(index) {
+      if (!confirm("❌ Удалить этот товар?")) return;
+      products.splice(index, 1);
+
+      fetch('/products.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(products)
+      }).then(() => {
+        alert("🗑️ Товар удалён!");
+        renderProducts();
+      });
+    }
+  </script>
+</body>
+</html>
