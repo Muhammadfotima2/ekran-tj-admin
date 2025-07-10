@@ -2,11 +2,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📦 Товары</title>
+  <title>📦 Управление товарами</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      margin: 0;
       padding: 20px;
     }
     h2 {
@@ -15,85 +16,51 @@
     }
     .product {
       background: white;
-      border-radius: 10px;
       padding: 15px;
       margin-bottom: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .product input {
-      width: calc(100% - 20px);
+    .product input, .product select {
+      width: 100%;
       padding: 8px;
       margin: 5px 0;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 6px;
     }
-    .actions {
-      display: flex;
-      justify-content: space-between;
+    .product button {
+      width: 48%;
+      padding: 10px;
       margin-top: 10px;
-    }
-    .actions button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
       font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
-    .edit {
-      background-color: #007bff;
+    .save-btn {
+      background-color: #28a745;
       color: white;
     }
-    .delete {
+    .delete-btn {
       background-color: #dc3545;
       color: white;
+      float: right;
     }
   </style>
 </head>
 <body>
-  <h2>📦 Список товаров</h2>
-  <div id="products"></div>  <script>
-    fetch('products.json')
+  <h2>🛠 Редактирование товаров</h2>
+  <div id="product-list"></div>  <script>
+    let products = [];
+
+    fetch('/products.json')
       .then(res => res.json())
-      .then(products => {
-        const container = document.getElementById('products');
-
-        products.forEach((product, index) => {
-          const div = document.createElement('div');
-          div.className = 'product';
-
-          div.innerHTML = 
-            <label>Категория: <input value="${product.category}" /></label>
-            <label>Модель: <input value="${product.model}" /></label>
-            <label>Качество: <input value="${product.quality}" /></label>
-            <label>Цена (сомони): <input value="${product.price}" /></label>
-            <div class="actions">
-              <button class="edit">💾 Изменить</button>
-              <button class="delete">🗑 Удалить</button>
-            </div>
-          ;
-
-          div.querySelector('.edit').onclick = () => {
-            const inputs = div.querySelectorAll('input');
-            products[index] = {
-              category: inputs[0].value,
-              model: inputs[1].value,
-              quality: inputs[2].value,
-              price: inputs[3].value
-            };
-            alert('✅ Изменено (в демо, не сохраняется на сервере)');
-          };
-
-          div.querySelector('.delete').onclick = () => {
-            div.remove();
-            alert('❌ Удалено (в демо, не сохраняется на сервере)');
-          };
-
-          container.appendChild(div);
-        });
-      })
-      .catch(err => {
-        document.getElementById('products').innerText = 'Ошибка загрузки товаров.';
-        console.error(err);
+      .then(data => {
+        products = data;
+        renderProducts();
       });
-  </script></body>
-</html>
+
+    function renderProducts() {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      products.forEach((product, index) => {
