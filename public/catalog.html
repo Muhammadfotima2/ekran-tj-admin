@@ -8,78 +8,68 @@
     body {
       margin: 0;
       padding: 20px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url("./image/background.jpg") no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+      background: url("image/background.jpg") no-repeat center center fixed;
       background-size: cover;
       color: white;
-    }
-
-    .welcome-box {
-      max-width: 600px;
-      margin: 50px auto 30px;
-      padding: 20px 25px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
       text-align: center;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
     }
 
-    .welcome-box h1 {
-      font-size: 26px;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .welcome-box p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .catalog-section {
-      margin-top: 20px;
-    }
-
-    .catalog-section h2 {
+    .welcome {
       font-size: 20px;
-      margin-bottom: 10px;
-      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .kbs-rotate {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 22px;
+      background: linear-gradient(45deg, red, yellow, orange, cyan, violet);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: spin 5s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.6);
       padding: 15px;
       border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      margin: 20px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
     }
 
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
+    .card h2 {
+      font-size: 18px;
+      margin: 5px 0;
     }
 
     .card p {
-      margin: 3px 0;
+      margin: 4px 0;
       font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="welcome-box">
-    <h1>👋 Хуш омадед ба <br>EKRAN.TJ – KBS</h1>
-    <p>📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем</p>
-    <p>🛠 Бренди боэътимоди <b>KBS</b> кафолати равшании аъло ва устуворӣ мебошад!</p>
+  <div class="welcome">
+    👋 Хуш омадед ба <br>
+    <span class="kbs-rotate">EKRAN.TJ - KBS</span><br>
+    📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем<br>
+    🛠 Бренди боэътимоди <b class="kbs-rotate">KBS</b> кафолати равшании аъло ва устуворӣ мебошад!
   </div>
 
-  <div class="catalog-section">
-    <h2>📦 Каталог экранов</h2>
-    <div class="card">
-      <h3>📱 Samsung A10</h3>
-      <p>🛠 Качество: Original</p>
-      <p>🏷 Бренд: KBS</p>
-      <p>💰 Цена: 90 сомонӣ</p>
-    </div>
+  <div class="card">
+    <h2>📦 Samsung A10</h2>
+    <p>🛠 Качество: Original</p>
+    <p>🏷 Бренд: KBS</p>
+    <p>💰 Цена: 90 сомонӣ</p>
   </div>
 </body>
 </html>
