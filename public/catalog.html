@@ -5,52 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EKRAN.TJ - KBS</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
-
     body {
       margin: 0;
       padding: 20px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url("./image/background.jpg") no-repeat center center fixed;
+      background-size: cover;
       color: white;
-      background: linear-gradient(-45deg, #ff0033, #330000, #000000, #660000);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      background-attachment: fixed;
-      min-height: 100vh;
     }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .welcome-box {
+      max-width: 600px;
+      margin: 50px auto 30px;
+      padding: 20px 25px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
     }
 
-    .welcome {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 30px;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    .welcome-box h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .welcome-box p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .catalog-section {
+      margin-top: 20px;
+    }
+
+    .catalog-section h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
       text-align: center;
     }
 
-    .welcome h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
-    .welcome p {
-      font-size: 20px;
-      line-height: 1.6;
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 3px 0;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="welcome">
-    <h1>👋 Хуш омадед ба <b>EKRAN.TJ - KBS</b></h1>
+  <div class="welcome-box">
+    <h1>👋 Хуш омадед ба <br>EKRAN.TJ – KBS</h1>
     <p>📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем</p>
     <p>🛠 Бренди боэътимоди <b>KBS</b> кафолати равшании аъло ва устуворӣ мебошад!</p>
+  </div>
+
+  <div class="catalog-section">
+    <h2>📦 Каталог экранов</h2>
+    <div class="card">
+      <h3>📱 Samsung A10</h3>
+      <p>🛠 Качество: Original</p>
+      <p>🏷 Бренд: KBS</p>
+      <p>💰 Цена: 90 сомонӣ</p>
+    </div>
   </div>
 </body>
 </html>
