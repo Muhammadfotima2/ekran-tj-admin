@@ -3,122 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>📦 Каталог товаров</title>
+  <title>EKRAN.TJ-KBS</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
       margin: 0;
       padding: 20px;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom right, #00c6ff, #0072ff);
+      color: white;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
     }
     h2 {
       text-align: center;
-      color: #333;
+      margin-bottom: 30px;
     }
-    .selector {
-      margin: 20px auto;
-      max-width: 400px;
+    .product-card {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 16px;
+      margin: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
-    select {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+    .product-card h3 {
+      margin: 0 0 10px 0;
     }
-    .product-list {
-      margin-top: 30px;
-    }
-    .product {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 16px;
-      margin-bottom: 15px;
-    }
-    .product div {
+    .product-card p {
       margin: 6px 0;
     }
-    input[type="number"] {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      margin-top: 10px;
-      width: 100%;
-      padding: 10px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 8px;
+    .order-btn {
+      background: white;
+      color: #0072ff;
       font-weight: bold;
-      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
       cursor: pointer;
-    }
-    button:hover {
-      background: #218838;
+      margin-top: 10px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h2>📦 Каталог товаров</h2>
-  <div class="selector">
-    <label for="category-select">Выберите категорию:</label>
-    <select id="category-select">
-      <option value="">-- Выберите --</option>
-      <option value="iPhone">🍏 iPhone</option>
-      <option value="Samsung">📱 Samsung</option>
-      <option value="Redmi">🔴 Redmi</option>
-      <option value="Realmi">🟢 Realmi</option>
-      <option value="Oppo">🟣 Oppo</option>
-      <option value="Vivo">🧿 Vivo</option>
-      <option value="Huawei">🔵 Huawei</option>
-      <option value="Honor">💛 Honor</option>
-      <option value="Tecno">🧩 Tecno</option>
-      <option value="Infinix">💚 Infinix</option>
-      <option value="ZTE">🔷 ZTE</option>
-      <option value="WIKO">⚪ WIKO</option>
-    </select>
-  </div>
-
-  <div class="product-list" id="product-list"></div>
+  <h1>📱 EKRAN.TJ-KBS</h1>
+  <h2>📦 Samsung</h2>
+  <div id="product-list"></div>
 
   <script>
-    let products = [];
-
     fetch('/products.json')
       .then(res => res.json())
       .then(data => {
-        products = data;
+        const samsungProducts = data.filter(p => p.category === 'Samsung');
+        const container = document.getElementById('product-list');
+
+        samsungProducts.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'product-card';
+          div.innerHTML = 
+            <h3>📱 ${p.model}</h3>
+            <p>🛠 Качество: ${p.quality}</p>
+            <p>🏷 Бренд: KBS</p>
+            <p>💰 Цена: ${p.price} сомонӣ</p>
+            <button class="order-btn">🛒 Заказать</button>
+          ;
+          container.appendChild(div);
+        });
       });
-
-    document.getElementById('category-select').addEventListener('change', function () {
-      const selected = this.value;
-      const filtered = products.filter(p => p.category === selected);
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-
-      filtered.forEach((product, index) => {
-        const div = document.createElement('div');
-        div.className = 'product';
-        div.innerHTML = 
-          <div><strong>📱 Модель:</strong> ${product.model}</div>
-          <div><strong>✅ Качество:</strong> ${product.quality}</div>
-          <div><strong>💰 Цена:</strong> ${product.price} сомони</div>
-          <label>Количество</label>
-          <input type="number" id="qty-${index}" min="1" value="1">
-          <button onclick="addToOrder('${product.model}', ${product.price}, document.getElementById('qty-${index}').value)">➕ Добавить в заказ</button>
-        ;
-        container.appendChild(div);
-      });
-    });
-
-    function addToOrder(model, price, qty) {
-      alert(✅ Добавлено в заказ:\nМодель: ${model}\nКол-во: ${qty}\nСумма: ${qty * price} сомони);
-    }
   </script>
 </body>
 </html>
