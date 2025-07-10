@@ -1,55 +1,92 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Каталог товаров</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📦 Каталог товаров</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f3f3f3;
+      background: #f0f2f5;
       margin: 0;
       padding: 20px;
     }
     h2 {
       text-align: center;
-      margin-bottom: 20px;
+      color: #333;
     }
-    .category {
-      margin: 20px 0;
+    .selector {
+      margin: 20px auto;
+      max-width: 400px;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .product-list {
+      margin-top: 30px;
     }
     .product {
-      background: white;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 16px;
+      margin-bottom: 15px;
     }
     .product div {
-      margin: 5px 0;
+      margin: 6px 0;
     }
-    select, input[type=number], button {
+    input[type="number"] {
       width: 100%;
-      margin-top: 5px;
       padding: 8px;
+      margin-top: 5px;
       border-radius: 8px;
       border: 1px solid #ccc;
     }
     button {
-      background-color: #007bff;
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
       color: white;
       border: none;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #0056b3;
+      background: #218838;
     }
   </style>
 </head>
 <body>
-  <h2>📦 Каталог товаров</h2><label for="category-select">Выберите категорию:</label> <select id="category-select"> <option value="">-- Выберите --</option> <option value="iPhone"> iPhone</option> <option value="Samsung">Samsung</option> <option value="Redmi">Redmi</option> <option value="Realmi">Realmi</option> <option value="Oppo">Oppo</option> <option value="Vivo">Vivo</option> <option value="Huawei">Huawei</option> <option value="Honor">Honor</option> <option value="Tecno">Tecno</option> <option value="Infinix">Infinix</option> <option value="ZTE">ZTE</option> <option value="WIKO">WIKO</option> </select>
+  <h2>📦 Каталог товаров</h2>
+  <div class="selector">
+    <label for="category-select">Выберите категорию:</label>
+    <select id="category-select">
+      <option value="">-- Выберите --</option>
+      <option value="iPhone">🍏 iPhone</option>
+      <option value="Samsung">📱 Samsung</option>
+      <option value="Redmi">🔴 Redmi</option>
+      <option value="Realmi">🟢 Realmi</option>
+      <option value="Oppo">🟣 Oppo</option>
+      <option value="Vivo">🧿 Vivo</option>
+      <option value="Huawei">🔵 Huawei</option>
+      <option value="Honor">💛 Honor</option>
+      <option value="Tecno">🧩 Tecno</option>
+      <option value="Infinix">💚 Infinix</option>
+      <option value="ZTE">🔷 ZTE</option>
+      <option value="WIKO">⚪ WIKO</option>
+    </select>
+  </div>
 
-  <div id="product-list"></div>  <script>
+  <div class="product-list" id="product-list"></div>
+
+  <script>
     let products = [];
 
     fetch('/products.json')
@@ -70,7 +107,7 @@
         div.innerHTML = 
           <div><strong>📱 Модель:</strong> ${product.model}</div>
           <div><strong>✅ Качество:</strong> ${product.quality}</div>
-          <div><strong>💲 Цена:</strong> ${product.price} сомони</div>
+          <div><strong>💰 Цена:</strong> ${product.price} сомони</div>
           <label>Количество</label>
           <input type="number" id="qty-${index}" min="1" value="1">
           <button onclick="addToOrder('${product.model}', ${product.price}, document.getElementById('qty-${index}').value)">➕ Добавить в заказ</button>
@@ -80,7 +117,8 @@
     });
 
     function addToOrder(model, price, qty) {
-      alert(Товар добавлен: ${model}, Цена: ${price}, Кол-во: ${qty});
+      alert(✅ Добавлено в заказ:\nМодель: ${model}\nКол-во: ${qty}\nСумма: ${qty * price} сомони);
     }
-  </script></body>
+  </script>
+</body>
 </html>
