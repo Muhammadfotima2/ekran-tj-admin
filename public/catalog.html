@@ -2,140 +2,55 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог товаров | EKRAN.TJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EKRAN.TJ - KBS</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
-      background: url('./image/background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      padding: 20px;
       margin: 0;
+      padding: 20px;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      background: linear-gradient(-45deg, #ff0033, #330000, #000000, #660000);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      background-attachment: fixed;
+      min-height: 100vh;
     }
-    h2 {
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
       text-align: center;
+    }
+
+    .welcome h1 {
+      font-size: 32px;
       margin-bottom: 20px;
     }
-    .category {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
-    }
-    .category button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: none;
-      background-color: #ff4b2b;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .category button:hover {
-      background-color: #ff416c;
-    }
-    .product {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 15px;
-      margin: 10px auto;
-      border-radius: 10px;
-      max-width: 400px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    .product div {
-      margin: 5px 0;
-    }
-    input[type="number"] {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-      margin-top: 8px;
-    }
-    button.add-btn {
-      background-color: #28a745;
-      color: white;
-      padding: 10px;
-      width: 100%;
-      margin-top: 10px;
-      font-weight: bold;
-      border-radius: 8px;
-      border: none;
-    }
-    .welcome {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .welcome h2 {
-      font-size: 26px;
-      background: linear-gradient(90deg, #ff4b2b, #ff416c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+
     .welcome p {
-      font-size: 18px;
-      color: #ffffffb3;
-      margin: 5px 0;
+      font-size: 20px;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
   <div class="welcome">
-    <h2>👋 Хуш омадед ба <b>EKRAN.TJ - KBS</b></h2>
+    <h1>👋 Хуш омадед ба <b>EKRAN.TJ - KBS</b></h1>
     <p>📱 Мо беҳтарин экранҳоро барои ҳамаи телефонҳо пешниҳод мекунем</p>
-    <p>🛠 Бренди боэътимоди <b style="color: #ff7777;">KBS</b> кафолати равшании аъло ва устуворӣ мебошад!</p>
+    <p>🛠 Бренди боэътимоди <b>KBS</b> кафолати равшании аъло ва устуворӣ мебошад!</p>
   </div>
-
-  <div class="category" id="category-buttons"></div>
-  <div id="product-list"></div>
-
-  <script>
-    let products = [];
-
-    fetch('/products.json')
-      .then(res => res.json())
-      .then(data => {
-        products = data;
-        const categories = [...new Set(products.map(p => p.category))];
-        const catContainer = document.getElementById('category-buttons');
-        categories.forEach(cat => {
-          const btn = document.createElement('button');
-          btn.textContent = cat;
-          btn.onclick = () => renderProducts(cat);
-          catContainer.appendChild(btn);
-        });
-      });
-
-    function renderProducts(category) {
-      const filtered = products.filter(p => p.category === category);
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      filtered.forEach((product, index) => {
-        const div = document.createElement('div');
-        div.className = 'product';
-        div.innerHTML = `
-          <div><strong>📱 Модель:</strong> ${product.model}</div>
-          <div><strong>✅ Качество:</strong> ${product.quality}</div>
-          <div><strong>💲 Цена:</strong> ${product.price} сомонӣ</div>
-          <label>Количество</label>
-          <input type="number" id="qty-${index}" min="1" value="1">
-          <button class="add-btn" onclick="addToOrder('${product.model}', ${product.price}, document.getElementById('qty-${index}').value)">➕ Добавить в заказ</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function addToOrder(model, price, qty) {
-      alert(`✅ Добавлено в заказ:
-Модель: ${model}
-Цена: ${price} сомонӣ
-Количество: ${qty}`);
-    }
-  </script>
 </body>
 </html>
