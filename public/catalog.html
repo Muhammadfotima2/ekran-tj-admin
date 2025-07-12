@@ -3308,5 +3308,21 @@
     if (backButton) backButton.style.display = 'none';
   }
 </script>
+    <!-- Сводка заказа -->
+<div id="order-summary" style="display:none; position:fixed; top:10%; left:5%; right:5%; background:white; padding:20px; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index:1000;">
+    <h2 style="color:#0072ff;">🧾 Ваш заказ</h2>
+    <ul id="order-list" style="margin-bottom:16px;"></ul>
+    <div id="order-total" style="font-weight:bold; margin-bottom:16px;"></div>
+    <textarea id="order-comment" placeholder="Комментарий (необязательно)" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ccc; margin-bottom:16px;"></textarea>
+    <button onclick="sendOrder()" style="background:#0072ff; color:white; padding:10px 20px; border:none; border-radius:10px; font-weight:bold;">📤 Подтвердить заказ</button>
+</div>
+
+<!-- Кнопка внизу для просмотра сводки -->
+<div style="position:fixed; bottom:20px; right:20px; z-index:999;">
+    <button onclick="openSummary()" style="background:#00cc66; color:white; padding:14px 20px; border:none; border-radius:14px; font-size:16px; font-weight:bold;">📋 Просмотреть заказ</button>
+</div>
+
+<!-- Подключение JavaScript -->
+<script src="order.js"></script>
 </body>
 </html>
