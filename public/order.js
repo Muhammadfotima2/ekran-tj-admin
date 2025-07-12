@@ -1,62 +1,88 @@
-let cart = [];
+// Добавление товара в корзину
+const cart = [];
 
-// Добавить товар в корзину
-function addToCart(button) {
-    const card = button.closest('.product-card');
-    const name = card.querySelector('h3').textContent.trim();
-    const quality = card.querySelector('p:nth-of-type(1)').textContent.trim();
-    const brand = card.querySelector('p:nth-of-type(2)').textContent.trim();
-    const priceText = card.querySelector('p:nth-of-type(3)').textContent.trim();
-    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
-    const quantity = parseInt(card.querySelector('input').value);
+function addToCart(model, quality, brand, price, quantity) {
+  if (!quantity || quantity <= 0) return alert("❗ Укажите корректное количество");
 
-    const item = { name, quality, brand, price, quantity };
-    cart.push(item);
-    alert('🛒 Товар добавлен в заказ!');
+  cart.push({ model, quality, brand, price, quantity });
+  showToast("✅ Товар добавлен");
 }
 
-// Открыть сводку заказа
+// Показываем тост-сообщение
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.style.position = "fixed";
+  toast.style.bottom = "20px";
+  toast.style.left = "50%";
+  toast.style.transform = "translateX(-50%)";
+  toast.style.background = "green";
+  toast.style.color = "white";
+  toast.style.padding = "10px 20px";
+  toast.style.borderRadius = "10px";
+  toast.style.zIndex = "9999";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+// Открыть форму заказа
 function openSummary() {
-    const list = document.getElementById('order-list');
-    const total = document.getElementById('order-total');
-    list.innerHTML = '';
-    let sum = 0;
+  const summary = document.getElementById('order-summary');
+  if (summary) summary.style.display = 'block';
 
-    cart.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = `${item.name} — ${item.quantity} шт. × ${item.price} сом = ${item.price * item.quantity} сом`;
-        list.appendChild(li);
-        sum += item.price * item.quantity;
-    });
+  const list = document.getElementById('cart-items');
+  list.innerHTML = '';
+  let total = 0;
 
-    total.textContent = `💰 Общая сумма: ${sum} сомони`;
-    document.getElementById('order-summary').style.display = 'block';
+  cart.forEach((item, index) => {
+    const row = document.createElement('div');
+    const sum = item.price * item.quantity;
+    total += sum;
+    row.innerHTML = `📱 <b>${item.model}</b> | ${item.quality} | ${item.brand} — <b>${item.quantity}</b> шт = <b>${sum} сомонӣ</b>`;
+    list.appendChild(row);
+  });
+
+  document.getElementById('total').innerHTML = `💰 Общая сумма: <b>${total} сомонӣ</b>`;
 }
 
 // Отправить заказ в Telegram
 function sendOrder() {
-    const comment = document.getElementById('order-comment').value.trim();
-    let message = '🛍 Новый заказ:\n\n';
-    cart.forEach(item => {
-        message += `📱 ${item.name}\n🛠 ${item.quality}\n🏷 ${item.brand}\n🔢 ${item.quantity} × ${item.price} = ${item.price * item.quantity} сом\n\n`;
-    });
+  const name = document.getElementById("client-name").value.trim();
+  const comment = document.getElementById("order-comment").value.trim();
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    message += `💰 Общая сумма: ${total} сомони\n`;
-    if (comment) message += `📝 Комментарий: ${comment}`;
+  if (!name) return alert("❗ Пожалуйста, введите имя");
 
-    fetch('https://api.telegram.org/bot7861896848:AAHJk1QcelFZ1owB0LO4XXNFflBz-WDZBIE/sendMessage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: 6172156061,
-            text: message
-        })
-    }).then(() => {
-        alert('✅ Ташаккур,ки моро интихоб кардед!\nЗакази Шумо Қабул шуд ва дар кутоҳтарин муддат\n ба Шумо дар тамос мешавем, миннатдорем!');
-        cart = [];
-        document.getElementById('order-summary').style.display = 'none';
-    }).catch(() => {
-        alert('❌ Ошибка при отправке заказа.');
+  let message = `🛒 <b>Новый заказ</b>%0A`;
+  message += `👤 Имя: <b>${name}</b>%0A`;
+
+  cart.forEach(item => {
+    message += `📱 ${item.model} | ${item.quality} | ${item.brand} — ${item.quantity} шт = ${item.price * item.quantity} сомонӣ%0A`;
+  });
+
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  message += `💰 Общая сумма: <b>${total} сомонӣ</b>%0A`;
+
+  if (comment) message += `💬 Комментарий: ${comment}%0A`;
+
+  message += `%0A🙏 <b>Ташаккур ки моро интихоб кардед!</b>%0A📦 Закази Шумо қабул шуд ва дар кутоҳтарин муддат ба Шумо дар тамос мешавем.`;
+
+  // Заменить YOUR_BOT_TOKEN и YOUR_ADMIN_ID на реальные данные
+  const TOKEN = '7861896848:AAHJk1QcelFZ1owB0LO4XXNFflBz-WDZBIE';
+  const CHAT_ID = '6172156061';
+
+  const url = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}&parse_mode=HTML`;
+
+  fetch(url)
+    .then(response => {
+      if (response.ok) {
+        alert("✅  Ташаккур,ки моро интихоб кардед!\nЗакази Шумо Қабул шуд ва дар кутоҳтарин муддат\n ба Шумо дар тамос мешавем, миннатдорем!");
+        location.reload();
+      } else {
+        alert("❌ Ошибка при отправке заказа");
+      }
+    })
+    .catch(error => {
+      console.error("Ошибка:", error);
+      alert("❌ Не удалось отправить заказ");
     });
 }
