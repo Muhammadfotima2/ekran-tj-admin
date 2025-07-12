@@ -3309,20 +3309,21 @@
   }
 </script>
 
-    <!-- Форма оформления заказа -->
-<div id="order-summary" style="display:none; margin-top: 30px; padding: 20px; background: #ffffffdd; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-  <h3 style="text-align: center; color: #333;">📋 Сводка заказа</h3>
+<!-- 🛒 Форма оформления заказа -->
+<div id="order-summary" style="display:none; position: fixed; top: 10%; left: 5%; right: 5%; background: #e7f3ff; padding: 20px; border-radius: 16px; box-shadow: 0 0 10px rgba(0,0,0,0.2); z-index: 1000;">
+  <h3 style="text-align:center; font-size: 20px;">📋 Сводка заказа</h3>
   <div id="cart-items" style="margin-bottom: 10px;"></div>
-  <div id="total" style="font-weight: bold; margin-bottom: 10px;"></div>
-  <input type="text" id="client-name" placeholder="👤 Имя клиента" style="width:100%; padding: 10px; margin-bottom: 10px; border-radius: 10px; border: 1px solid #ccc;" />
-  <textarea id="order-comment" placeholder="💬 Комментарий (необязательно)" rows="3" style="width:100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;"></textarea>
-  <button onclick="sendOrder()" style="margin-top: 15px; width: 100%; background: green; color: white; padding: 12px; border: none; border-radius: 12px; font-size: 16px;">✅ Подтвердить заказ</button>
+  <div id="total" style="font-weight: bold; margin-bottom: 10px;">💵 Общая сумма: 0 сомонӣ</div>
+  <input type="text" id="client-name" placeholder="👤 Имя клиента" style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+  <textarea id="order-comment" placeholder="💬 Комментарий (необязательно)" style="width: 100%; padding: 10px; margin-bottom: 10px;"></textarea>
+  <button onclick="sendOrder()" style="width: 100%; background: green; color: white; padding: 12px; border: none; border-radius: 10px; font-size: 16px;">✅ Подтвердить заказ</button>
 </div>
-    <!-- Кнопка внизу для просмотра сводки заказа -->
-<div style="position:fixed; bottom:20px; right:20px; z-index:999;">
-  <button onclick="openSummary()" style="background:#00cc66; color:white; padding:14px 20px; border:none; border-radius:12px; font-size:16px;">🧾 Сводка заказа</button>
-</div>
-<!-- Подключение JavaScript -->
+
+<!-- 📄 Кнопка "Сводка заказа" -->
+<button onclick="openSummary()" style="position: fixed; bottom: 20px; right: 20px; background: #00c66b; color: white; padding: 12px 18px; border-radius: 10px; border: none; font-size: 15px; z-index: 999;">
+📄 Сводка заказа
+</button>
+
 <script src="order.js"></script>
 </body>
 </html>
