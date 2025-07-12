@@ -3318,7 +3318,10 @@
   <textarea id="order-comment" placeholder="💬 Комментарий (необязательно)" rows="3" style="width:100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc;"></textarea>
   <button onclick="sendOrder()" style="margin-top: 15px; width: 100%; background: green; color: white; padding: 12px; border: none; border-radius: 12px; font-size: 16px;">✅ Подтвердить заказ</button>
 </div>
-    
+    <!-- Кнопка внизу для просмотра сводки заказа -->
+<div style="position:fixed; bottom:20px; right:20px; z-index:999;">
+  <button onclick="openSummary()" style="background:#00cc66; color:white; padding:14px 20px; border:none; border-radius:12px; font-size:16px;">🧾 Сводка заказа</button>
+</div>
 <!-- Подключение JavaScript -->
 <script src="order.js"></script>
 </body>
