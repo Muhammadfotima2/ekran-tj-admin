@@ -53,7 +53,7 @@ function sendOrder() {
             text: message
         })
     }).then(() => {
-        alert('✅ Заказ отправлен!');
+        alert('✅ Ташаккур,ки моро интихоб кардед!\nЗакази Шумо Қабул шуд ва дар кутоҳтарин муддат\n ба Шумо дар тамос мешавем, миннатдорем!');
         cart = [];
         document.getElementById('order-summary').style.display = 'none';
     }).catch(() => {
