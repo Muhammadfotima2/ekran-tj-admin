@@ -1,188 +1,202 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>EKRAN.TJ - KBS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Каталог моделей</title>
   <style>
     body {
       font-family: sans-serif;
-      background-color: #eaf6ff;
+      background: #eaf6ff;
       margin: 0;
-      padding: 0;
+      padding: 1rem;
     }
-    header {
-      background: linear-gradient(to right, #00aaff, #0088cc);
-      padding: 15px;
+    h1 {
       text-align: center;
+      margin-bottom: 1rem;
+    }
+    .product-card {
+      background: #00bfff;
       color: white;
-      font-size: 24px;
-      font-weight: bold;
-      border-radius: 0 0 20px 20px;
-    }
-    .product {
-      background-color: #00bfff;
-      border-radius: 20px;
-      padding: 15px;
-      margin: 15px;
-      color: white;
-      font-weight: bold;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    }
-    .product input {
-      margin-top: 5px;
-      padding: 5px;
-      width: 50px;
-    }
-    button {
-      padding: 10px 15px;
-      border: none;
       border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .product-card input[type="number"] {
+      width: 50px;
+      padding: 0.2rem;
+      font-size: 1rem;
+    }
+    .product-card button {
+      background: #005bce;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      margin-left: 1rem;
       cursor: pointer;
     }
-    .order-summary {
-      background-color: #f5f5f5;
-      margin: 15px;
-      padding: 15px;
-      border-radius: 20px;
-      display: none;
+    .summary-btn {
+      display: inline-block;
+      margin: 1rem 0;
+      padding: 0.5rem 1rem;
+      background: #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
     }
-    .summary-item {
+    .order-summary {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 1rem;
+    }
+    .order-summary h2 {
+      margin-top: 0;
+    }
+    .order-item {
+      background: #f3f3f3;
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin: 0.3rem 0;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 5px;
+      align-items: center;
     }
-    .comment-box {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-    .delete-btn {
-      background-color: red;
+    .order-item button {
+      background: red;
+      border: none;
       color: white;
-      border-radius: 10px;
-      padding: 5px 10px;
-      margin-left: 10px;
+      border-radius: 8px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.9rem;
+      cursor: pointer;
     }
-    .add-msg {
+    .success-popup {
       position: fixed;
-      bottom: 10%;
+      bottom: 1rem;
       left: 50%;
       transform: translateX(-50%);
-      background-color: #d1ffd1;
-      padding: 15px;
-      border-radius: 15px;
-      display: none;
-      box-shadow: 0 0 10px #00000030;
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 999;
     }
   </style>
 </head>
 <body>
 
-  <header>📱 EKRAN.TJ - KBS</header>
+<h1>📱 Каталог моделей</h1>
 
-  <div class="product" data-model="Samsung A10" data-quality="Original" data-price="100">
-    Samsung A10<br>
-    Качество: Original<br>
-    Цена: 100 сомонӣ<br>
-    Количество: <input type="number" min="1" value="1"> 
-    <button onclick="addToOrder(this)">🛒 Заказать</button>
-  </div>
+<div class="product-card" data-name="Samsung A10" data-quality="Original" data-brand="KBS" data-price="100">
+  <strong>Samsung A10</strong><br>
+  Качество: Original<br>
+  Бренд: KBS<br>
+  Цена: 100 сомонӣ<br>
+  Количество: <input type="number" value="1" min="1">
+  <button onclick="addToCart(this)">🛒 Заказать</button>
+</div>
 
-  <div class="product" data-model="Samsung A20" data-quality="OLED" data-price="210">
-    Samsung A20<br>
-    Качество: OLED<br>
-    Цена: 210 сомонӣ<br>
-    Количество: <input type="number" min="1" value="1"> 
-    <button onclick="addToOrder(this)">🛒 Заказать</button>
-  </div>
+<div class="product-card" data-name="Samsung A20" data-quality="OLED" data-brand="KBS" data-price="210">
+  <strong>Samsung A20</strong><br>
+  Качество: OLED<br>
+  Бренд: KBS<br>
+  Цена: 210 сомонӣ<br>
+  Количество: <input type="number" value="1" min="1">
+  <button onclick="addToCart(this)">🛒 Заказать</button>
+</div>
 
-  <div style="text-align:center;">
-    <button id="toggleSummary" style="background:#0047ff; color:white; margin:10px 0;">📋 Сводка заказа</button>
-  </div>
+<button class="summary-btn" onclick="showOrder()">📋 Сводка заказа</button>
 
-  <div id="orderSummary" class="order-summary">
-    <h3>🧺 Ваш заказ:</h3>
-    <ul id="orderList" style="list-style-type: disc; padding-left: 20px;"></ul>
-    <p id="totalAmount" style="font-weight: bold;">💰 Общая сумма: 0 сомонӣ</p>
-    <textarea id="comment" class="comment-box" placeholder="Комментарий (необязательно)"></textarea><br><br>
-    <button onclick="submitOrder()" style="background:green; color:white;">✅ Подтвердить заказ</button>
-  </div>
+<div id="order-summary" class="order-summary" style="display:none;"></div>
 
-  <div id="addedMessage" class="add-msg">
-    ✅ Товар добавлен в корзину
-  </div>
+<div id="popup" class="success-popup" style="display: none;"></div>
 
-  <script>
-    const order = [];
+<script>
+  const cart = [];
 
-    function addToOrder(button) {
-      const product = button.closest('.product');
-      const model = product.dataset.model;
-      const quality = product.dataset.quality;
-      const price = parseInt(product.dataset.price);
-      const quantity = parseInt(product.querySelector('input').value);
+  function addToCart(button) {
+    const card = button.closest('.product-card');
+    const name = card.dataset.name;
+    const quality = card.dataset.quality;
+    const brand = card.dataset.brand;
+    const price = parseInt(card.dataset.price);
+    const qty = parseInt(card.querySelector('input[type="number"]').value);
 
-      for (let i = 0; i < quantity; i++) {
-        order.push({ model, quality, price });
-      }
-
-      showAddedMessage();
-      updateOrderSummary();
+    const key = ${name} (${quality});
+    const index = cart.findIndex(item => item.key === key);
+    if (index > -1) {
+      cart[index].qty += qty;
+    } else {
+      cart.push({ key, name, quality, brand, price, qty });
     }
 
-    function updateOrderSummary() {
-      const list = document.getElementById('orderList');
-      const totalText = document.getElementById('totalAmount');
-      list.innerHTML = '';
+    showPopup("✅ Товар добавлен в корзину");
+  }
 
-      let total = 0;
-
-      order.forEach((item, index) => {
-const li = document.createElement('li');
-        li.innerHTML = ${item.model} (${item.quality}) x 1 = ${item.price} сомонӣ <button class="delete-btn" onclick="deleteItem(${index})">Удалить</button>;
-        list.appendChild(li);
-        total += item.price;
-      });
-
-      totalText.innerHTML = 💰 Общая сумма: ${total} сомонӣ;
+  function showOrder() {
+    const summary = document.getElementById('order-summary');
+    if (cart.length === 0) {
+      summary.innerHTML = "<strong>🧺 Заказ пуст</strong>";
+      summary.style.display = "block";
+      return;
     }
 
-    function deleteItem(index) {
-      order.splice(index, 1);
-      updateOrderSummary();
-    }
+    let html = "<h2>📦 Ваш заказ:</h2>";
+    let total = 0;
+    cart.forEach((item, i) => {
+      const sum = item.price * item.qty;
+      total += sum;
+      html += <div class="order-item">
+        ${item.key} x ${item.qty} = ${sum} сомонӣ
+        <button onclick="removeItem(${i})">Удалить</button>
+      </div>;
+    });
+html += <p><strong>💰 Общая сумма: ${total} сомонӣ</strong></p>;
+    html += <input type="text" placeholder="Комментарий (необязательно)" style="width:100%;padding:0.5rem;border-radius:6px;margin-top:10px;"><br><br>;
+    html += <button onclick="confirmOrder()" style="background:#28a745;color:white;padding:0.5rem 1rem;border:none;border-radius:8px;">✅ Подтвердить заказ</button>;
 
-    function showAddedMessage() {
-      const msg = document.getElementById('addedMessage');
-      msg.style.display = 'block';
-      setTimeout(() => {
-        msg.style.display = 'none';
-      }, 1500);
-    }
+    summary.innerHTML = html;
+    summary.style.display = "block";
+  }
 
-    document.getElementById('toggleSummary').addEventListener('click', () => {
-      const summary = document.getElementById('orderSummary');
-      summary.style.display = summary.style.display === 'block' ? 'none' : 'block';
+  function removeItem(index) {
+    cart.splice(index, 1);
+    showOrder();
+  }
+
+  function confirmOrder() {
+    const summary = document.getElementById('order-summary');
+    const comment = summary.querySelector('input[type="text"]').value || "нет";
+    let message = "✅ Заказ подтверждён!<br>";
+    let total = 0;
+
+    cart.forEach(item => {
+      const sum = item.price * item.qty;
+      message += 📦 ${item.key} x ${item.qty} = ${sum} сомонӣ<br>;
+      total += sum;
     });
 
-    function submitOrder() {
-      const comment = document.getElementById('comment').value.trim();
-      const orderText = order.map(i => ${i.model} (${i.quality}) x 1 = ${i.price} сомонӣ).join('\n');
-      const total = order.reduce((sum, i) => sum + i.price, 0);
+    message += 💰 Общая сумма: ${total} сомонӣ<br>;
+    message += 💬 Комментарий: ${comment};
 
-      const message = 📦 Новый заказ:\n\n${orderText}\n\n💰 Общая сумма: ${total} сомонӣ\n📝 Комментарий: ${comment || 'нет'}\n\n✅ Спасибо за заказ!;
+    cart.length = 0;
+    summary.style.display = "none";
+    showPopup(message);
+  }
 
-      alert(message);
-
-      order.length = 0;
-      document.getElementById('comment').value = '';
-      updateOrderSummary();
-      document.getElementById('orderSummary').style.display = 'none';
-    }
-  </script>
+  function showPopup(msg) {
+    const popup = document.getElementById("popup");
+    popup.innerHTML = msg;
+    popup.style.display = "block";
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 3000);
+  }
+</script>
 
 </body>
 </html>
