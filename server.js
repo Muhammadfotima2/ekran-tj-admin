@@ -24,7 +24,7 @@ app.post('/order', async (req, res) => {
   `;
 
   try {
-    await axios.post(https://api.telegram.org/bot${BOT_TOKEN}/sendMessage, {
+    await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       chat_id: CHAT_ID,
       text,
       parse_mode: 'HTML'
