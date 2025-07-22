@@ -38,5 +38,5 @@ app.post('/order', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(🚀 Сервер на порту ${PORT});
+  console.log(`🚀 Сервер на порту ${PORT}`);
 });
