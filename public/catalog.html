@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>📱 Каталог моделей</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e6f2ff;
+      margin: 0;
+      padding: 20px;
+    }
 
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .product {
+      background-color: #00bfff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      color: white;
+    }
+
+    .product h2 {
+      margin-top: 0;
+    }
+
+    .product input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    .product button {
+      background-color: #0055ff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background-color: #0033cc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📱 Каталог моделей</h1>
+
+  <div class="product">
+    <h2>Samsung A10</h2>
+    <div>Качество: Original</div>
+    <div>Бренд: KBS</div>
+    <div>💰 Цена: 100</div>
+    <label>Количество:
+      <input type="number" value="1" min="1">
+    </label>
+    <button>🛒 Заказать</button>
+  </div>
+
+  <div class="product">
+    <h2>Samsung A20</h2>
+    <div>Качество: OLED</div>
+    <div>Бренд: KBS</div>
+    <div>💰 Цена: 210</div>
+    <label>Количество:
+      <input type="number" value="1" min="1">
+    </label>
+    <button>🛒 Заказать</button>
+  </div>
+
+  <!-- Подключаем JS -->
+  <script src="order.js"></script>
+</body>
+</html>
