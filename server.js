@@ -14,14 +14,14 @@ app.use(express.static('public'));
 app.post('/order', async (req, res) => {
   const { product, price, quantity, total, user } = req.body;
 
-  const text = 
+  const text = `
 <b>Новый заказ из Telegram WebApp</b>
 <b>Пользователь:</b> ${user.first_name} (@${user.username})
 <b>ID:</b> ${user.id}
 <b>Модель:</b> ${product}
 <b>Цена:</b> ${price} x ${quantity}
 <b>Итого:</b> ${total} сомонӣ
-  ;
+  `;
 
   try {
     await axios.post(https://api.telegram.org/bot${BOT_TOKEN}/sendMessage, {
